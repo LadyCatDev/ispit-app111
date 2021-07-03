@@ -1,0 +1,42 @@
+<div *ngIf="!this.userService.isSignedIn" style="height: 100vh;">
+  <div id="banner" class="banner">
+    <div fxLayout="column" fxLayoutAlign="center center" class="container">
+      <div class="dobrodoslica" fxLayoutAlign="center center">
+        <div class="tekst-dobrodoslice">
+          <h1>DOBRODOŠLI!</h1>
+          <br>
+        </div>
+        <div id="user-form">
+          <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (ngSubmit)="onSubmit(f)">           
+            <mat-form-field>
+              <input type="email" matInput placeholder="Vaša email adresa" ngModel name="email" email required
+                #emailInput="ngModel">
+              <mat-error *ngIf="emailInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+              <mat-error *ngIf="!emailInput.hasError('required')">Unesite ispravnu email adresu.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field hintLabel="Unesite minimum 8 karaktera">
+              <input type="password" matInput placeholder="Vaša šifra" ngModel name="password" required minlength="8"
+                #passInput="ngModel">
+              <mat-hint align="end">{{ passInput.value?.length }} / 8</mat-hint>
+            </mat-form-field>
+            <br>
+            <div class="dugmici">
+              <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15px">
+                <button type="submit" [disabled]="f.invalid" mat-raised-button color="warn" class="btn-wlcm">Prijavi se</button>
+                <button mat-raised-button color="primary" (click)="toSignup()" class="btn-wlcm">Registracija</button>
+              </div>
+            </div>
+            <p class="error-text">{{ this.errorText }}</p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+  </div>
+<div *ngIf="this.userService.isSignedIn">
+  <app-products></app-products>
+</div>
+
+

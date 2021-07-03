@@ -1,0 +1,89 @@
+<section class="banner">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h1 style=" font-weight: bold; font-size: 40px;">Lista porudžbina</h1>
+  </div>
+  <!-- Tekst koji se javlja kada ne postoji nijedna porudžbina napravljena od strane korisnika -->
+  <div *ngIf="this.orderService.orderList.length == 0" fxLayout="row wrap"
+    style="width: 100%; height: inherit; padding: 12.1vh 0; color: white;">
+    <h2 fxFlex fxLayoutAlign="center center">Trenutno ne postoji nijedna
+      porudžbina!</h2>
+  </div>
+  <!-- Tabelarni ispis podataka o porudžbinama -->
+  <div *ngIf="!(this.orderService.orderList.length == 0)">
+    <div fxLayoutAlign="center center">
+      <mat-form-field fxFlex=" 30%">
+        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filtriranje porudžbina">
+      </mat-form-field>
+    </div>
+
+    <mat-table style="background-color: rgba(0, 0, 0, 0);" [dataSource]="orderSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>ID porudžbine</mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.id }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Ime porudžbine</mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.name }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.status }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="deliveryTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Vreme dostave</mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.deliveryTime | number }} dan(a)
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Cena</mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.totalPrice | number }} din.
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Akcije</mat-header-cell>
+        <mat-cell *matCellDef="let order" fxLayoutGap="5px">
+          <button mat-raised-button class="btn-wlcm" color="warn" *ngIf="order.status == 'U toku'"
+            (click)="this.orderService.cancelOrder(order)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+          <button mat-raised-button class="btn-wlcm" color="primary" *ngIf="order.status == 'Otkazana'" (click)="toCart()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-raised-button class="btn-wlcm" color="primary" *ngIf="order.status == 'Završena'" (click)="reorder(order)">
+            <mat-icon>cached</mat-icon>
+          </button>
+          <button *ngIf="!(order.status == 'U toku')" mat-raised-button color="warn" (click)="deleteOrder(order)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="rating">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Ocena</mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          <star-rating *ngIf="order.status == 'Završena'" [value]="order.rating" [totalstars]="5" checkedcolor="rgb(255,254,59)"
+            uncheckedcolor="gray" size="24px" readonly="false" (rate)="onRate($event, order)"></star-rating>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let rows; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+  </div>
+</section>
+<app-footer></app-footer>

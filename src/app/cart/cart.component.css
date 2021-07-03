@@ -1,0 +1,23 @@
+img {
+  width:100%;
+}
+
+h1 {
+  margin-top: 5vh;
+}
+
+.remove {
+  color: rgb(255,254,59);
+}
+
+.remove:hover {
+  cursor: pointer;
+}
+
+.li-ylw {
+  color: rgb(255,254,59);
+}
+.slika-prikaz {
+  width: 100px;
+  height: 120px;
+}

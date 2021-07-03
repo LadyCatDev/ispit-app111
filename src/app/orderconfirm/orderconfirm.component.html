@@ -1,0 +1,21 @@
+<section>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <h1 mat-dialog-title>Potvrda porudžbine</h1>
+    <mat-dialog-content>Da li želite da potvrdite porudžbinu?
+      <p>Vreme dostave porudžbine je: {{ recievedData.deliveryTime }} dan(a)</p>
+      <p>Novac se uplacuje iskljucivo preko ziro racuna.</p>
+    </mat-dialog-content>
+    <ul>
+      <li>primalac: B&S Auto Delovi, Salvador Aljende 92, 11000 Beograd-Karaburma</li>
+      <li>svrha uplate: Uplata za auto deo</li>
+      <li>ziro racun: 12313123</li>
+      <li>poziv na broj: 312332</li>
+    </ul>
+      <br>
+    <mat-dialog-actions>
+      <!-- Potvrda ili odustajanje od porudžbine -->
+      <button type="submit" mat-raised-button class="btn-wlcm"color="primary" [mat-dialog-close]="true">Potvrdi</button>
+      <button mat-raised-button color="warn" [mat-dialog-close]="true">Otkaži</button>
+    </mat-dialog-actions>
+  </form>
+</section>

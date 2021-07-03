@@ -1,0 +1,19 @@
+/* 
+https://sass-lang.com/guide 
+https://material.angular.io/guide/theming
+https://material.io/design/color/the-color-system.html#color-usage-and-palettes
+
+*/
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$my-theme-primary: mat-palette($mat-deep-orange);
+$my-theme-accent: mat-palette($mat-blue, A100, A500, A400);
+$my-theme-warn: mat-palette($mat-red);
+
+$my-theme: mat-dark-theme($my-theme-primary,
+  $my-theme-accent,
+  $my-theme-warn);
+
+@include angular-material-theme($my-theme);

@@ -1,0 +1,68 @@
+<section class="banner">
+<form id="advert-form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm"
+  (ngSubmit)="onSubmit(f)" enctype="multipart/form-data">
+  <p class="error-text">{{ this.errorText }}</p>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Naziv dela" ngModel name="name" required maxlength="255" #nameInput="ngModel">
+    <mat-error *ngIf="nameInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Opis" ngModel name="description" required maxlength="255" #descriptionInput="ngModel">
+    <mat-error *ngIf="descriptionInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Cena" ngModel name="price" required maxlength="255" #priceInput="ngModel">
+    <mat-error *ngIf="priceInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Kategorija</mat-label>
+    <mat-select name="category" ngModel matInput required>
+      <mat-option value="karoserija">Karoserija</mat-option>
+      <mat-option value="elektrika">Elektrika</mat-option>
+      <mat-option value="akumulator1">Akumulator</mat-option>
+      <mat-option value="sijalice1">Sijalice</mat-option>
+      <mat-option value="trap">Trap</mat-option>
+      <mat-option value="pogon tockova">Pogon tockova</mat-option>
+      <mat-option value="motor">Motor</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Model Auta" ngModel name="carModel" required maxlength="255" #carModelInput="ngModel">
+    <mat-error *ngIf="carModelInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Tip Proizvoda</mat-label>
+    <mat-select name="productType" ngModel matInput required>
+      <mat-option value="originalan">Originalan deo</mat-option>
+      <mat-option value="zamenski">Zamenski Deo</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Garancija(U mesecima)" ngModel name="guaranty" required maxlength="255" #guarantyInput="ngModel">
+    <mat-error *ngIf="guarantyInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Stanje</mat-label>
+    <mat-select name="availability" ngModel matInput required>
+      <mat-option value="Dostupan">Dostupan</mat-option>
+      <mat-option value="Nedostupan">Nedostupan</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Ocena(1-5)" ngModel name="rating" required maxlength="255" #ratingInput="ngModel">
+    <mat-error *ngIf="ratingInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Broj ocena" ngModel name="numberOfPersonsRated" required maxlength="255" #numberOfPersonsRatedInput="ngModel">
+    <mat-error *ngIf="numberOfPersonsRatedInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Vreme Dostave(U danima)" ngModel name="deliveryTime" required maxlength="255" #deliveryTimeInput="ngModel">
+    <mat-error *ngIf="deliveryTimeInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+  </mat-form-field>
+  <div>
+    <button type="submit" [disabled]="f.invalid" mat-raised-button color="warn">Dodaj proizvod</button>
+  </div>
+</form>
+</section>
+<app-footer></app-footer>

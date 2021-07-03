@@ -1,0 +1,57 @@
+<section class="banner" style="height: auto;">
+    <div fxLayout="row wrap" style="width: 100%; height: inherit; padding: 70px; color: rgb(255,254,59);">
+      <section fxFlex="1 0 1" fxFlexOffset="10px" fxLayoutGap="15px" fxLayoutAlign="center center"
+        *ngFor="let product of this.productSource.data"
+        style="border: 2px solid #44413f; background-color: rgba(116, 105, 105, 0.65); padding: 10px; margin: 5px;">
+        <!-- Slike koje stoje uz pojedinačne proizvode i pojavljuju se u zavisnosti od tipa proizvoda i dodatnih stavki -->
+        <img *ngIf="product.category == 'karoserija'" src="../../assets/karoserija.jpg"/>
+        <img *ngIf="product.category == 'elektrika'" src="../../assets/pumpazagorivo.jpg"/>
+        <img *ngIf="product.category == 'sijalice'" src="../../assets/sijalice.jpg"/>
+        <img *ngIf="product.category == 'akumulator'" src="../../assets/akumulator.jpg"/>
+        <img *ngIf="product.category == 'trap'" src="../../assets/trap.jpg"/>
+        <img *ngIf="product.category == 'pogon tockova'" src="../../assets/pogontockova.jpg"/>
+        <img *ngIf="product.category == 'motor'" src="../../assets/motor.jpg"/>
+        <img *ngIf="product.category == 'trap1'" src="../../assets/trap1.jpg"/>
+        <img *ngIf="product.category == 'sijalice1'" src="../../assets/sijalice1.jpg"/>
+        <img *ngIf="product.category == 'akumulator1'" src="../../assets/akumulator1.jpg"/>
+        <img *ngIf="product.category == 'karoserija1'" src="../../assets/karoserija1.jpg"/>
+        <img *ngIf="product.category == 'motor1'" src="../../assets/motor1.jpg"/>
+
+        <!-- Informacije o proizvodima -->
+        <ul style="width: 60%;">
+          <li>Kategorija: {{ product.category }}</li>
+          <li>Naziv: {{ product.name }}</li>
+          <li>Cena: {{ product.price | number }} din.</li>
+          <li>Model auta: {{ product.carModel }}</li>
+          <li>Tip auto dela: {{ product.productType }}</li>
+          <li>Garancija: {{ product.guaranty }}</li>
+          <li>Opis: {{ product.description }}</li>
+          <li>Vreme dostave: {{ product.deliveryTime | number }} dan(a)</li>
+          <li>Dostupnost: {{ product.availability }}</li>
+          <li fxLayoutAlign="center center" fxLayoutGap="5px">
+            <!-- Broj zvezdica se popunjava prema izračunatoj aritmetičkoj sredini ocena zadatih od strane korisnika-->
+            <star-rating [value]="product.rating" [totalstars]="5" checkedcolor="rgb(255,254,59)" uncheckedcolor="gray"
+              size="24px" readonly="false" (rate)="onRate($event, product)"></star-rating>
+            <p>({{ product.rating }} / 5) ({{ product.numberOfPersonsRated }})</p>
+          </li>
+          <!-- Dodavanje proizvoda u korpu -->
+          <li fxLayoutAlign="center center" fxLayoutGap="5px"><button mat-raised-button class="btn-purple"
+              (click)="addToCart(product)" [disabled]="product.availability == 'Nedostupno'">Dodaj u
+              korpu</button>
+              <a [ngClass]="(product.isAdded)?'added':'favourite'" (click)="addToFavourites(product)">
+                <mat-icon>favorite_border</mat-icon>
+              </a>
+          </li>
+        </ul>
+        <div fxFlex fxLayoutAlign="end center" fxLayoutGap="10px">
+          <button mat-raised-button color="primary" (click)=" editProduct(product.id)">
+            Izmeni
+          </button>
+          <button mat-raised-button color="warn" (click)="deleteProduct(product)">
+            Ukloni
+          </button>
+        </div>
+      </section>
+    </div>
+</section>
+<app-footer></app-footer>

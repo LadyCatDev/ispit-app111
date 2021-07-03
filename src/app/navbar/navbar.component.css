@@ -1,0 +1,27 @@
+mat-toolbar {
+  background-color: rgb(255 254 59);
+}
+
+.active {
+  color: white;
+}
+
+.ikonice-bar {
+  color: #000000;
+}
+
+.btn-ylw {
+  background-color: rgb(255, 254, 59);
+}
+
+.odjava-red{
+  background-color: #ff1515;
+  color: rgb(255 254 59);
+}
+
+.btn-blck {
+  background-color: black;
+  color: rgb(255 254 59);
+}
+
+

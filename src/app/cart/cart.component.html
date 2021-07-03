@@ -1,0 +1,52 @@
+<section class="banner" style="height: auto;">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h1 style="font-weight: bold; font-size: 40px;">Vaša korpa</h1>
+  </div>
+  <div style="padding: 53px; height:auto;">
+    <!--Tekst koji se javlja kada u korpi nema elemenata-->
+    <h2 *ngIf="this.productService.cartList.length == 0" fxLayoutAlign="center center">Vaša korpa je
+      trenutno prazna!</h2>
+    <section fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-around center"
+      *ngFor="let product of this.productService.cartList"
+      style="border: 2px solid rgb(255 254 59); padding: 7px; margin: 0 auto; width: 30%;">
+      <!-- Slike koje stoje uz pojedinačne proizvode i pojavljuju se u zavisnosti od tipa proizvoda i dodatnih stavki -->
+        <img *ngIf="product.name == 'Karoserija'" src="../../assets/karoserija.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Sijalice'" src="../../assets/sijalice.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Akumulator'" src="../../assets/akumulator.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Pumpa za gorivo'" src="../../assets/pumpazagorivo.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Trap'" src="../../assets/trap.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Pogon Tockova'" src="../../assets/pogontockova.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Motor'" src="../../assets/motor.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Trap1'" src="../../assets/trap1.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Sijalica1'" src="../../assets/sijalice1.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Akumulator1'" src="../../assets/akumulator1.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Karoserija1'" src="../../assets/karoserija1.jpg" class="slika-prikaz"/>
+        <img *ngIf="product.name == 'Motor1'" src="../../assets/motor1.jpg" class="slika-prikaz"/>
+      <!-- Osnovne informacije o proizvodima -->
+      <ul style="width: 40%;"class="li-ylw">
+        <li>Naziv: {{ product.name }}</li>
+        <li>Količina: {{ product.quantity | number }}</li>
+        <li>Cena: {{ product.price * product.quantity | number }} din.</li>
+        <li>Garancija: {{ product.guaranty | number }} mesec(i)</li>
+        <li>Model auta: {{ product.carModel }}</li>
+        <li>Vreme dostave: {{ product.deliveryTime | number }} dan(a)</li>
+      </ul>
+      <!-- Brisanje pojedinačnih jedinica proizvoda iz korpe -->
+      <a class="remove" (click)="deleteFromCart(product)">
+        <mat-icon>close</mat-icon>
+      </a>
+    </section>
+    <!-- Brisanje svih elemenata iz korpe, prikaz ukupne cene i dugme za poručivanje -->
+    <div *ngIf="!(this.productService.cartList.length == 0)">
+      <button mat-raised-button color="warn" fxLayoutAlign="end" style="margin: 0 auto; margin-top: 20px;"
+        (click)="removeAll()">Ukloni
+        sve</button>
+      <h1 fxLayoutAlign="center center">Ukupna cena: {{ this.productService.cartTotal | number }} din.</h1>
+      <button mat-raised-button class="btn-wlcm"color="primary" fxLayoutAlign="end" style="margin: 0 auto;"
+        (click)="onOrderConfirm(this.productService.cartList)">Poruči</button>
+    </div>
+    
+  </div>
+
+</section>
+<app-footer></app-footer>

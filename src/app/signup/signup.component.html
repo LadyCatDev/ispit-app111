@@ -1,0 +1,45 @@
+<div style="background: radial-gradient(ellipse at center);
+    height: 100%;" class="banner">
+  <div id="form-text">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <h1 style="color: rgb(255, 254, 59); border-bottom: 1px solid rgb(255, 254, 59);">Registracija</h1>
+      <!-- Tekst sa mogućom greškom prilikom registrovanja -->
+      <p class="error-text">{{ this.errorText }}</p>
+      <mat-form-field>
+        <input type="email" matInput placeholder="Vaša email adresa" ngModel name="email" email required
+          #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+        <mat-error *ngIf="!emailInput.hasError('required')">Unesite ispravnu email adresu.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Unesite minimum 8 karaktera">
+        <input type="password" matInput placeholder="Vaša šifra" ngModel name="password" required minlength="8"
+          #passInput="ngModel">
+        <mat-error *ngIf="passInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+        <mat-hint align="end">{{ passInput.value?.length }} / 8</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="Ime" ngModel name="name" #nameInput="ngModel" required>
+        <mat-error *ngIf="nameInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="Prezime" ngModel name="surname" #surnameInput="ngModel" required>
+        <mat-error *ngIf="surnameInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput placeholder="Adresa stanovanja" ngModel name="address" #addressInput="ngModel"
+          required>
+        <mat-error *ngIf="addressInput.hasError('required')">Polje ne bi smelo da bude prazno.</mat-error>
+      </mat-form-field>
+      
+      <div class="dugmici">
+        <button type="submit" [disabled]="f.invalid" mat-raised-button class="btn-wlcm">Registruj se</button>
+      </div>
+    </form>
+  </div>
+
+<app-footer></app-footer>
+</div>
